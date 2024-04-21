@@ -27,7 +27,7 @@
             import * as THREE from "three";
             import {vaxInitParallax, scene, light, camera} from "vax";
 
-            vaxInitParallax(frame, -1);
+            vaxInitParallax(frame);
 
             light.intensity = 8;
             
@@ -50,29 +50,32 @@
                 scene.add(coneN);
             }
 
+            var numberCones = 190;
+            var cubeSize = 6;
+
             function rp() {
-                return Math.random() * 6 - 3;
+                return Math.random() * cubeSize * 2 - cubeSize;
             }
 
-            for (var i = 0; i < 90; i++) {
-                addCone(rp(),rp(),-3, 0.8);
+            for (var i = 0; i < numberCones; i++) {
+                addCone(rp(),rp(),-cubeSize);
             }
-            for (var i = 0; i < 90; i++) {
-                addCone(rp(),rp(),3, 0.8);
-            }
-
-            for (var i = 0; i < 90; i++) {
-                addCone(rp(),3,rp(), 0.8);
-            }
-            for (var i = 0; i < 90; i++) {
-                addCone(rp(),-3,rp(), 0.8);
+            for (var i = 0; i < numberCones; i++) {
+                addCone(rp(),rp(),cubeSize);
             }
 
-            for (var i = 0; i < 90; i++) {
-                addCone(3,rp(),rp(), 0.8);
+            for (var i = 0; i < numberCones; i++) {
+                addCone(rp(),cubeSize,rp());
             }
-            for (var i = 0; i < 90; i++) {
-                addCone(-3,rp(),rp(), 0.8);
+            for (var i = 0; i < numberCones; i++) {
+                addCone(rp(),-cubeSize,rp());
+            }
+
+            for (var i = 0; i < numberCones; i++) {
+                addCone(cubeSize,rp(),rp());
+            }
+            for (var i = 0; i < numberCones; i++) {
+                addCone(-cubeSize,rp(),rp());
             }
 
             var lastTime = 0;
