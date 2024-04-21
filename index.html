@@ -154,6 +154,8 @@
 				light.position.set(6 * Math.sin(k), 2 * Math.sin(k), 6 * Math.cos(k));
 				//camera.position.set(6 * Math.sin(k), 2 * Math.sin(k), 6 * Math.cos(k));
 				//camera.lookAt(new THREE.Vector3(0, 0, 0));
+                camera.position.x = Math.sin(k);
+		        camera.lookAt(new THREE.Vector3(0, 0, 0));
 
 				var fasterK = k * 4;
 				var animationK = fasterK - Math.floor(fasterK);
@@ -189,9 +191,10 @@
 
                 var p_x = 0;
                 var p_y = Math.cos(gamma);
-                var p_z = Math.sin(gamma);;
-                //camera.position.set(6 * Math.sin(k), 2 * Math.sin(k), 6 * Math.cos(k));
-                camera.position.set(p_x * 6, p_y * 6, p_z * 6);
+                var p_z = Math.sin(gamma);
+
+                camera.position.y = p_y * 6;
+                camera.position.z = p_z * 6;
 		        camera.lookAt(new THREE.Vector3(0, 0, 0));
 			}
 			
