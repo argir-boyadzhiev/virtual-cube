@@ -180,7 +180,9 @@
 				document.getElementById('gamma').innerHTML = event.gamma.toFixed(1);
 				document.getElementById('absolute').innerHTML = event.absolute.toFixed(1);
 
-                var gamma = 90 - event.gamma.toFixed(1);
+                console.log(event.gamma);
+
+                var gamma = 90 - event.gamma;
                 if (gamma > 90)
                     gamma = gamma - 180;
                 gamma = gamma * Math.PI / 180;
