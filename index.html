@@ -21,8 +21,8 @@
 	</head>
 	
 	<body>
-		<div>VJ Gamma <span id="gamma"></span> VAngle <span id="vangle"></span></div>
-		<div>VJ Alpha <span id="alpha"></span> HAngle <span id="hangle"></span></div>
+		<div>VA Gamma <span id="gamma"></span> VAngle <span id="vangle"></span></div>
+		<div>VA Alpha <span id="alpha"></span> HAngle <span id="hangle"></span></div>
 
 		<script type="module">
 
@@ -196,6 +196,10 @@
 
                 var p_x = Math.cos(gamma) * Math.sin(alpha);
                 var p_z = Math.cos(gamma) * Math.cos(alpha);
+                if (gamma < 0) {
+                    p_x *= -1;
+                    p_z *= -1;
+                }
 
                 camera.position.x = p_x * 6;
                 camera.position.y = p_y * 6;
