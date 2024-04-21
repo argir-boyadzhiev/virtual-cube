@@ -21,12 +21,8 @@
 	</head>
 	
 	<body>
-        <!--
-		<h3>alpha = <span id="alpha"></span></h3>
-		<h3>beta = <span id="beta"></span></h3>
-		<h3>gamma = <span id="gamma"></span></h3>
-		<h3>absolute = <span id="absolute"></span></h3>
-        -->
+		<div>Gamma <span id="gamma"></span>   VAngle <span id="vangle"></span></div>
+
 		<script type="module">
 
             import * as THREE from "three";
@@ -183,14 +179,14 @@
 
 				//document.getElementById('alpha').innerHTML = event.alpha.toFixed(1);
 				//document.getElementById('beta').innerHTML = event.beta.toFixed(1);
-				//document.getElementById('gamma').innerHTML = event.gamma.toFixed(1);
+				document.getElementById('gamma').innerHTML = event.gamma.toFixed(1);
 
                 var gamma = 90 - event.gamma;
                 if (gamma > 90)
                     gamma = gamma - 180;
-                gamma = gamma * Math.PI / 180;
+                gamma = - gamma * Math.PI / 180;
 
-                //document.getElementById('absolute').innerHTML = gamma.toFixed(1);
+                document.getElementById('vangle').innerHTML = gamma.toFixed(1);
 
                 var p_x = 0;
                 var p_y = Math.cos(gamma);
