@@ -37,12 +37,10 @@
 
 			var camera = new THREE.PerspectiveCamera(60, 1, 1, 100);
             
-            var currentLookDirection = new THREE.Vector3(0, 0, -1);
-            var endLookDirection = new THREE.Vector3(0, 0, -1);
             {
                 var k = 0;
                 camera.position.set(0, 0, 0);
-		        camera.lookAt(currentLookDirection);
+		        camera.lookAt(0,0,-1);
             }
 
 			var light = new THREE.PointLight('white', 500);
@@ -99,59 +97,8 @@
 			}
 
             var lastTime = 0;
-            var lookSpeed = 0.1;
 			function frame(time)
 			{
-				var deltaTime = time - lastTime;
-                lastTime = time;
-
-                var deltaX = endLookDirection.x - currentLookDirection.x;
-                if (Math.abs(deltaX) > lookSpeed / 100) {
-                    if (Math.abs(deltaX) < lookSpeed) {
-                        currentLookDirection.x = endLookDirection.x;
-                    }
-                    else {
-                        if (deltaX > 0) {
-                            currentLookDirection.x += lookSpeed * deltaTime;
-                        }
-                        else {
-                            currentLookDirection.x -= lookSpeed * deltaTime;
-                        }
-                    }
-                } 
-
-                var deltaY = endLookDirection.y - currentLookDirection.y;
-                if (Math.abs(deltaY) > lookSpeed / 100) {
-                    if (Math.abs(deltaY) < lookSpeed) {
-                        currentLookDirection.y = endLookDirection.y;
-                    }
-                    else {
-                        if (deltaY > 0) {
-                            currentLookDirection.y += lookSpeed * deltaTime;
-                        }
-                        else {
-                            currentLookDirection.y -= lookSpeed * deltaTime;
-                        }
-                    }
-                } 
-
-                var deltaZ = endLookDirection.z - currentLookDirection.z;
-                if (Math.abs(deltaZ) > lookSpeed / 100) {
-                    if (Math.abs(deltaZ) < lookSpeed) {
-                        currentLookDirection.z = endLookDirection.z;
-                    }
-                    else {
-                        if (deltaZ > 0) {
-                            currentLookDirection.z += lookSpeed * deltaTime;
-                        }
-                        else {
-                            currentLookDirection.z -= lookSpeed * deltaTime;
-                        }
-                    }
-                }
-
-                camera.lookAt(currentLookDirection);
-
 				renderer.render(scene, camera);
 			}
 
@@ -179,7 +126,7 @@
                     p_z *= -1;
                 }
 
-		        endLookDirection = new THREE.Vector3(-p_x, -p_y, -p_z);
+		        camera.lookAt(new THREE.Vector3(-p_x, -p_y, -p_z));
 			}
 			
 		</script>
