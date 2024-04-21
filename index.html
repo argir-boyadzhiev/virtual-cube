@@ -130,7 +130,7 @@
                     p_z *= -1;
                 }
 
-		        camera.position.set(new THREE.Vector3(p_x, p_y, p_z));
+		        camera.position.set(p_x, p_y, p_z);
 		        camera.lookAt(new THREE.Vector3(0, 0, 0));
 		        //camera.lookAt(new THREE.Vector3(-p_x, -p_y, -p_z));
 			}
