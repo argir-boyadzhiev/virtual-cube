@@ -21,9 +21,8 @@
 	</head>
 	
 	<body>
-		<div>VT Gamma <span id="gamma"></span> VAngle <span id="vangle"></span></div>
-		<div>VT Alpha <span id="alpha"></span> HAngle <span id="hangle"></span></div>
-		<div>VT Betta <span id="betta"></span> HAngle <span id="hangle"></span></div>
+		<div>VJ Gamma <span id="gamma"></span> VAngle <span id="vangle"></span></div>
+		<div>VJ Alpha <span id="alpha"></span> HAngle <span id="hangle"></span></div>
 
 		<script type="module">
 
@@ -153,7 +152,7 @@
 				light.position.set(6 * Math.sin(k), 2 * Math.sin(k), 6 * Math.cos(k));
 				//camera.position.set(6 * Math.sin(k), 2 * Math.sin(k), 6 * Math.cos(k));
 				//camera.lookAt(new THREE.Vector3(0, 0, 0));
-                camera.position.x = Math.sin(k);
+                //camera.position.x = Math.sin(k);
 		        camera.lookAt(new THREE.Vector3(0, 0, 0));
 
 				var fasterK = k * 4;
@@ -180,21 +179,25 @@
                     return;
 
 				document.getElementById('alpha').innerHTML = event.alpha.toFixed(1);
-				document.getElementById('beta').innerHTML = event.beta.toFixed(1);
 				document.getElementById('gamma').innerHTML = event.gamma.toFixed(1);
 
                 var gamma = 90 - event.gamma;
                 if (gamma > 90)
                     gamma = gamma - 180;
-                gamma = - gamma * Math.PI / 180;
+                gamma = - gamma * Math.PI / 180; // -0.5 pi : 0.5 pi
 
                 document.getElementById('vangle').innerHTML = gamma.toFixed(1);
 
-                //var betta = event.betta;
+                var alpha = event.alpha * Math.PI / 180; // 0 : 2 pi
 
-                var p_y = Math.sin(gamma);
-                var p_z = Math.cos(gamma);
+                document.getElementById('hangle').innerHTML = alpha.toFixed(1);
 
+                var p_y = Math.sin(gamma); // Vertical
+
+                var p_x = Math.cos(gamma) * Math.sin(alpha);
+                var p_z = Math.cos(gamma) * Math.cos(alpha);
+
+                camera.position.x = p_x * 6;
                 camera.position.y = p_y * 6;
                 camera.position.z = p_z * 6;
 		        camera.lookAt(new THREE.Vector3(0, 0, 0));
