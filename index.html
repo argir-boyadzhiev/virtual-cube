@@ -109,7 +109,7 @@
                     p_z *= -1;
                 }
 
-		        camera.lookAt(new THREE.Vector3(-p_x, -p_y, -p_z));
+		        camera.lookAt(new THREE.Vector3(-p_x * cubeSize, -p_y * cubeSize, -p_z * cubeSize));
 			}
 			
 		</script>
