@@ -45,94 +45,48 @@
                 camera.position.set(0, 0, 6);
 		        camera.lookAt(new THREE.Vector3(0, 0, 0));
             }
-            
 
 			var light = new THREE.PointLight('white', 500);
 			scene.add(light);
 
-			var materialOrange = new THREE.MeshLambertMaterial();
-			materialOrange.color.set(1, 0.1, 0);
-			var materialBlack = new THREE.MeshLambertMaterial();
-			materialBlack.color.set(0.01, 0.01, 0.01);
-			var materialWhite = new THREE.MeshLambertMaterial();
-			materialWhite.color.set('white');
+            var coneGeom = new THREE.ConeGeometry(0.1, 0.6);
+			
+            function addCone(x,y,z) {
+                var materialN = new THREE.MeshPhongMaterial();
+                var hue = Math.random() * 360;
+                materialN.color.set("hsl(" + hue + ", 50%, 30%)");
+                materialN.shininess = 0.5;
 
-			// This is so the eyes look more alive
-			var materialEye = new THREE.MeshPhongMaterial();
-			materialEye.color.set('black');
+                var coneN = new THREE.Mesh(coneGeom, materialN);
 
-			var penguin = new THREE.Group();
-			scene.add(penguin);
+                coneN.position.set(x, y, z);
+                scene.add(coneN);
+            }
 
-			var innerTorsoGeom = new THREE.BoxGeometry(1.0, 1.0, 1.0);
-			var innerTorso = new THREE.Mesh(innerTorsoGeom, materialWhite);
-			innerTorso.position.set(0, 0, 0);
-			penguin.add(innerTorso);
+            function rp() {
+                return Math.random() * 6 - 3;
+            }
 
-			var outerTorsoGeom = new THREE.BoxGeometry(1.1, 1.1, 0.9);
-			var outerTorso = new THREE.Mesh(outerTorsoGeom, materialBlack);
-			outerTorso.position.set(0, 0, -0.1);
-			penguin.add(outerTorso);
+            for (var i = 0; i < 90; i++) {
+                addCone(rp(),rp(),-3, 0.8);
+            }
+            for (var i = 0; i < 90; i++) {
+                addCone(rp(),rp(),3, 0.8);
+            }
 
-			var beakGeom = new THREE.ConeGeometry(0.1, 0.3);
-			var beak = new THREE.Mesh(beakGeom, materialOrange);
-			beak.position.set(0, 0.1, 0.6);
-			beak.rotation.set(Math.PI * 0.5, 0, 0);
-			penguin.add(beak);
+            for (var i = 0; i < 90; i++) {
+                addCone(rp(),3,rp(), 0.8);
+            }
+            for (var i = 0; i < 90; i++) {
+                addCone(rp(),-3,rp(), 0.8);
+            }
 
-			var leftEyeGeom = new THREE.SphereGeometry(0.1);
-			var leftEye = new THREE.Mesh(leftEyeGeom, materialEye);
-			leftEye.position.set(0.26, 0.25, 0.5);
-			leftEye.scale.set(1, 1, 0.3);
-			penguin.add(leftEye);
-
-			var rightEyeGeom = new THREE.SphereGeometry(0.1);
-			var rightEye = new THREE.Mesh(rightEyeGeom, materialEye);
-			rightEye.position.set(-0.26, 0.25, 0.5);
-			rightEye.scale.set(1, 1, 0.3);
-			penguin.add(rightEye);
-
-			var leftBrowGeom = new THREE.BoxGeometry(0.2, 0.05, 0.05);
-			var leftBrow = new THREE.Mesh(leftBrowGeom, materialBlack);
-			leftBrow.position.set(0.24, 0.35, 0.5);
-			leftBrow.rotation.set(0, 0, Math.PI * 0.1)
-			penguin.add(leftBrow);
-
-			var rightBrowGeom = new THREE.BoxGeometry(0.2, 0.05, 0.05);
-			var rightBrow = new THREE.Mesh(rightBrowGeom, materialBlack);
-			rightBrow.position.set(-0.24, 0.35, 0.5);
-			rightBrow.rotation.set(0, 0, Math.PI * -0.1)
-			penguin.add(rightBrow);
-
-			var tailGeom = new THREE.BoxGeometry(0.5, 0.1, 0.3);
-			var tail = new THREE.Mesh(tailGeom, materialBlack);
-			tail.position.set(0, -0.5, -0.5);
-			tail.rotation.set(-0.1, 0, 0);
-			penguin.add(tail);
-
-			var leftLegGeom = new THREE.BoxGeometry(0.3, 0.1, 0.4);
-			leftLegGeom.translate(0, 0, 0.2);
-			var leftLeg = new THREE.Mesh(leftLegGeom, materialOrange);
-			leftLeg.position.set(0.3, -0.52, 0.3);
-			penguin.add(leftLeg);
-
-			var rightLegGeom = new THREE.BoxGeometry(0.3, 0.1, 0.4);
-			rightLegGeom.translate(0, 0, 0.2);
-			var rightLeg = new THREE.Mesh(rightLegGeom, materialOrange);
-			rightLeg.position.set(-0.3, -0.52, 0.3);
-			penguin.add(rightLeg);
-
-			var leftWingGeom = new THREE.BoxGeometry(0.5, 0.1, 0.4);
-			leftWingGeom.translate(0.3, 0, 0);
-			var leftWing = new THREE.Mesh(leftWingGeom, materialBlack);
-			leftWing.position.set(0.5, 0, 0);
-			penguin.add(leftWing);
-
-			var rightWingGeom = new THREE.BoxGeometry(0.5, 0.1, 0.4);
-			rightWingGeom.translate(-0.3, 0, 0);
-			var rightWing = new THREE.Mesh(rightWingGeom, materialBlack);
-			rightWing.position.set(-0.5, 0, 0);
-			penguin.add(rightWing);
+            for (var i = 0; i < 90; i++) {
+                addCone(3,rp(),rp(), 0.8);
+            }
+            for (var i = 0; i < 90; i++) {
+                addCone(-3,rp(),rp(), 0.8);
+            }
 
 			window.addEventListener('resize', onWindowResize, false);
 			onWindowResize();
@@ -147,27 +101,8 @@
 
 			function frame(time)
 			{
-
 				var k = time / 1000;
-				light.position.set(6 * Math.sin(k), 2 * Math.sin(k), 6 * Math.cos(k));
-				//camera.position.set(6 * Math.sin(k), 2 * Math.sin(k), 6 * Math.cos(k));
-				//camera.lookAt(new THREE.Vector3(0, 0, 0));
-                //camera.position.x = Math.sin(k);
-		        camera.lookAt(new THREE.Vector3(0, 0, 0));
-
-				var fasterK = k * 4;
-				var animationK = fasterK - Math.floor(fasterK);
-				if (Math.floor(fasterK) % 2 == 0) {
-					animationK = 1 - animationK;
-				}
-
-				leftLeg.rotation.set(animationK * Math.PI * 0.3 + 0.1, 0, 0);
-				rightLeg.rotation.set((1 - animationK) * Math.PI * 0.3 + 0.1, 0, 0);
-				leftWing.rotation.set(0, Math.PI * ((1 - animationK) * 0.2 - 0.1), ((1 - animationK) * -0.2 - 0.1) * Math.PI);
-				rightWing.rotation.set(0, Math.PI * (-animationK * 0.2 + 0.1), (animationK * 0.2 + 0.1) * Math.PI);
-				
-				penguin.rotation.set(0, 0, (animationK * 2 - 1) * Math.PI * 0.01);
-
+				//light.position.set(6 * Math.sin(k), 2 * Math.sin(k), 6 * Math.cos(k));
 				renderer.render(scene, camera);
 			}
 
@@ -201,9 +136,9 @@
                     p_z *= -1;
                 }
 
-                camera.position.x = p_x * 6;
-                camera.position.y = p_y * 6;
-                camera.position.z = p_z * 6;
+                camera.position.x = p_x * 0.5;
+                camera.position.y = p_y * 0.5;
+                camera.position.z = p_z * 0.5;
 		        camera.lookAt(new THREE.Vector3(0, 0, 0));
 			}
 			
