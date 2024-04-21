@@ -21,9 +21,6 @@
 	</head>
 	
 	<body>
-		<div>VA Gamma <span id="gamma"></span> VAngle <span id="vangle"></span></div>
-		<div>VA Alpha <span id="alpha"></span> HAngle <span id="hangle"></span></div>
-
 		<script type="module">
 
             import * as THREE from "three";
@@ -42,8 +39,8 @@
             
             {
                 var k = 0;
-                camera.position.set(0, 0, 6);
-		        camera.lookAt(new THREE.Vector3(0, 0, 0));
+                camera.position.set(0, 0, 0);
+		        camera.lookAt(new THREE.Vector3(0, 0, -1));
             }
 
 			var light = new THREE.PointLight('white', 500);
@@ -102,7 +99,6 @@
 			function frame(time)
 			{
 				var k = time / 1000;
-				//light.position.set(6 * Math.sin(k), 2 * Math.sin(k), 6 * Math.cos(k));
 				renderer.render(scene, camera);
 			}
 
@@ -112,9 +108,6 @@
 			{
                 if(event.alpha == null)
                     return;
-
-				document.getElementById('alpha').innerHTML = event.alpha.toFixed(1);
-				document.getElementById('gamma').innerHTML = event.gamma.toFixed(1);
 
                 var gamma = 90 - event.gamma;
                 if (gamma > 90)
@@ -136,10 +129,7 @@
                     p_z *= -1;
                 }
 
-                camera.position.x = p_x * 0.5;
-                camera.position.y = p_y * 0.5;
-                camera.position.z = p_z * 0.5;
-		        camera.lookAt(new THREE.Vector3(0, 0, 0));
+		        camera.lookAt(new THREE.Vector3(-p_x, -p_y, -p_z));
 			}
 			
 		</script>
