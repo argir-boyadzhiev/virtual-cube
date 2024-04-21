@@ -35,9 +35,9 @@
             
             camera.position.set(0, 0, 0);
             camera.lookAt(0,0,-1);
-            camera.focus = 20;
+            camera.focus = 10;
 
-            var coneGeom = new THREE.ConeGeometry(0.1, 0.6);
+            var coneGeom = new THREE.ConeGeometry(2, 12);
 			
             function addCone(x,y,z) {
                 var materialN = new THREE.MeshPhongMaterial();
@@ -52,7 +52,7 @@
             }
 
             var numberCones = 190;
-            var cubeSize = 6;
+            var cubeSize = 100;
 
             function rp() {
                 return Math.random() * cubeSize * 2 - cubeSize;
