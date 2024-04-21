@@ -106,8 +106,9 @@
 
 			function deviceOrientation(event)
 			{
-                if(event.alpha == null)
+                if(event.alpha == null) {
                     return;
+                }
 
                 var gamma = 90 - event.gamma;
                 if (gamma > 90)
@@ -129,7 +130,9 @@
                     p_z *= -1;
                 }
 
-		        camera.lookAt(new THREE.Vector3(-p_x * 6, -p_y * 6, -p_z * 6));
+		        camera.position.set(new THREE.Vector3(p_x, p_y, p_z));
+		        camera.lookAt(new THREE.Vector3(0, 0, 0));
+		        //camera.lookAt(new THREE.Vector3(-p_x, -p_y, -p_z));
 			}
 			
 		</script>
