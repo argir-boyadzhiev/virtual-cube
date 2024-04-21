@@ -13,7 +13,8 @@
             {
               "imports": {
                 "three": "https://unpkg.com/three@0.161.0/build/three.module.js",
-                "three/addons/": "https://unpkg.com/three@0.161.0/examples/jsm/"
+                "three/addons/": "https://unpkg.com/three@0.161.0/examples/jsm/",
+                "vax": "https://boytchev.github.io/CourseVAX/lib/vax.js"
               }
             }
         </script>
@@ -24,27 +25,16 @@
 		<script type="module">
 
             import * as THREE from "three";
+            import {vaxInitParallax, scene, light, camera} from "vax";
 
-			var renderer = new THREE.WebGLRenderer({antialias: true});
-			renderer.setAnimationLoop(frame);
+            vaxInitParallax(frame);
 
-			document.body.appendChild(renderer.domElement);
-			document.body.style.margin = 0;
-			document.body.style.overflow = 'hidden';
-
-			var scene = new THREE.Scene();
-			scene.background = new THREE.Color('lightblue');
-
-			var camera = new THREE.PerspectiveCamera(60, 1, 1, 100);
+            light.intensity = 8;
             
-            {
-                var k = 0;
-                camera.position.set(0, 0, 0);
-		        camera.lookAt(0,0,-1);
-            }
-
-			var light = new THREE.PointLight('white', 500);
-			scene.add(light);
+			scene.background = new THREE.Color('lightgreen');
+            
+            camera.position.set(0, 0, 0);
+            camera.lookAt(0,0,-1);
 
             var coneGeom = new THREE.ConeGeometry(0.1, 0.6);
 			
@@ -85,22 +75,10 @@
                 addCone(-3,rp(),rp(), 0.8);
             }
 
-			window.addEventListener('resize', onWindowResize, false);
-			onWindowResize();
-
-
-			function onWindowResize(event)
-			{
-				camera.aspect = window.innerWidth / window.innerHeight;
-				camera.updateProjectionMatrix();
-
-				renderer.setSize(window.innerWidth, window.innerHeight, true);
-			}
-
             var lastTime = 0;
 			function frame(time)
 			{
-				renderer.render(scene, camera);
+                //...
 			}
 
             window.addEventListener("deviceorientation", deviceOrientation, true);
