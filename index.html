@@ -21,8 +21,7 @@
 	</head>
 	
 	<body>
-        <div>VA Gamma <span id="gamma"></span> VAngle <span id="vangle"></span></div>
-        <div>VA Alpha <span id="alpha"></span> HAngle <span id="hangle"></span></div>
+        <div>Alpha <span id="alpha"></span> : Gamma <span id="gamma"></span></div>
 
 		<script type="module">
 
@@ -133,8 +132,8 @@
                     p_z *= -1;
                 }
 
-                document.getElementById('alpha').innerHTML = event.alpha.toFixed(1);
-				document.getElementById('gamma').innerHTML = event.gamma.toFixed(1);
+                document.getElementById('alpha').innerHTML = alpha.toFixed(1);
+				document.getElementById('gamma').innerHTML = gamma.toFixed(1);
 
 		        camera.position.set(p_x, p_y, p_z);
 		        camera.lookAt(new THREE.Vector3(0, 0, 0));
