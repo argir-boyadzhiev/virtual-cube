@@ -21,7 +21,9 @@
 	</head>
 	
 	<body>
-		<div>VO Gamma <span id="gamma"></span>   VAngle <span id="vangle"></span></div>
+		<div>VT Gamma <span id="gamma"></span> VAngle <span id="vangle"></span></div>
+		<div>VT Alpha <span id="alpha"></span> HAngle <span id="hangle"></span></div>
+		<div>VT Betta <span id="betta"></span> HAngle <span id="hangle"></span></div>
 
 		<script type="module">
 
@@ -177,8 +179,8 @@
                 if(event.alpha == null)
                     return;
 
-				//document.getElementById('alpha').innerHTML = event.alpha.toFixed(1);
-				//document.getElementById('beta').innerHTML = event.beta.toFixed(1);
+				document.getElementById('alpha').innerHTML = event.alpha.toFixed(1);
+				document.getElementById('beta').innerHTML = event.beta.toFixed(1);
 				document.getElementById('gamma').innerHTML = event.gamma.toFixed(1);
 
                 var gamma = 90 - event.gamma;
@@ -187,6 +189,8 @@
                 gamma = - gamma * Math.PI / 180;
 
                 document.getElementById('vangle').innerHTML = gamma.toFixed(1);
+
+                //var betta = event.betta;
 
                 var p_y = Math.sin(gamma);
                 var p_z = Math.cos(gamma);
