@@ -27,7 +27,7 @@
             import * as THREE from "three";
             import {vaxInitParallax, scene, light, camera} from "vax";
 
-            vaxInitParallax(frame, 0.064);
+            vaxInitParallax(frame, 1);
 
             light.intensity = 8;
             
@@ -50,7 +50,7 @@
                 scene.add(coneN);
             }
 
-            var numberCones = 190;
+            var numberCones = 1000;
             var cubeSize = 100;
 
             function rp() {
