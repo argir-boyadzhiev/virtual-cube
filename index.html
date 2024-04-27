@@ -50,7 +50,8 @@
             camera.lookAt(0,0,-1);
             camera.focus = 5;
             camera.near = 60;
-            camera.far = 160;
+            camera.far = 180;
+            renderer.depth = true;
 
             var coneGeom = new THREE.ConeGeometry(2, 12);
 			
@@ -59,6 +60,7 @@
                 var hue = Math.random() * 360;
                 materialN.color.set("hsl(" + hue + ", 50%, 30%)");
                 materialN.shininess = 0.5;
+                materialN.depthTest = true;
 
                 var coneN = new THREE.Mesh(coneGeom, materialN);
 
@@ -90,24 +92,24 @@
             }
 
             for (var i = 0; i < numberCones; i++) {
-                addCone(rp(),rp(),-cubeSize);
+                addCone(rp(), rp(), -cubeSize);
             }
             for (var i = 0; i < numberCones; i++) {
-                addCone(rp(),rp(),cubeSize);
-            }
-
-            for (var i = 0; i < numberCones; i++) {
-                addCone(rp(),cubeSize,rp());
-            }
-            for (var i = 0; i < numberCones; i++) {
-                addCone(rp(),-cubeSize,rp());
+                addCone(rp(), rp(), cubeSize);
             }
 
             for (var i = 0; i < numberCones; i++) {
-                addCone(cubeSize,rp(),rp());
+                addCone(rp(), cubeSize,rp());
             }
             for (var i = 0; i < numberCones; i++) {
-                addCone(-cubeSize,rp(),rp());
+                addCone(rp(), -cubeSize,rp());
+            }
+
+            for (var i = 0; i < numberCones; i++) {
+                addCone(cubeSize, rp(), rp());
+            }
+            for (var i = 0; i < numberCones; i++) {
+                addCone(-cubeSize, rp(), rp());
             }
 
             var lastTime = 0;
