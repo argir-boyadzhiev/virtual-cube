@@ -49,6 +49,8 @@
             camera.position.set(0, 0, 0);
             camera.lookAt(0,0,-1);
             camera.focus = 5;
+            camera.near = 80;
+            camera.far = 120;
 
             var coneGeom = new THREE.ConeGeometry(2, 12);
 			
@@ -64,10 +66,10 @@
                 scene.add(coneN);
             }
 
-            var numberCones = 1000;
+            var numberCones = 500;
             var cubeSize = 100;
 
-            var canvasSize = 90;
+            var canvasSize = 100;
             var updateCanvas = true;
 
             function resizeUp() {
@@ -122,6 +124,9 @@
 
                     renderer.setSize(newWidth, window.innerHeight);
                 }
+
+                light.position.x = Math.cos(time) * 50;
+                light.position.z = Math.sin(time) * 50;
 			}
 
             window.addEventListener("deviceorientation", deviceOrientation, true);
