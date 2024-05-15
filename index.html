@@ -2,7 +2,7 @@
 
 <html>
 	<head>
-		<title>Orientation</title>
+		<title>Crystals</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 		<meta http-equiv='cache-control' content='no-cache'> 
@@ -44,8 +44,6 @@
 
             light.intensity = 8;
             
-			scene.background = new THREE.Color('lightgreen');
-            
             camera.position.set(0, 0, 0);
             camera.lookAt(0,0,-1);
             camera.focus = 80;
@@ -53,22 +51,43 @@
             camera.far = 180;
             renderer.depth = true;
 
-            var coneGeom = new THREE.ConeGeometry(2, 12);
-			
-            function addCone(x,y,z) {
-                var materialN = new THREE.MeshPhongMaterial();
-                var hue = Math.random() * 360;
-                materialN.color.set("hsl(" + hue + ", 50%, 30%)");
-                materialN.shininess = 0.5;
-                materialN.depthTest = true;
+            var tex_front =  'https://media.discordapp.net/attachments/451715651761995778/1240366888807043132/skybox_front.png?ex=66464d2f&is=6644fbaf&hm=8e6104bfa471f945b67d92f3cf46b14d259483bddfb50a4b441e41f19dffa6f1&=&format=webp&quality=lossless';
+			var tex_back =   'https://media.discordapp.net/attachments/451715651761995778/1240366889780383805/skybox_back.png?ex=66464d2f&is=6644fbaf&hm=e9dfd93c6f91f57e0cd6e826ce10186ae4956a0aede4f2b0e2bea0e038aeb9e0&=&format=webp&quality=lossless';
+			var tex_top =    'https://media.discordapp.net/attachments/451715651761995778/1240366889025409054/skybox_top.png?ex=66464d2f&is=6644fbaf&hm=c8e917d26fd649c67310f384fe20f7bc48f756835cc4b6f904562ba89a735524&=&format=webp&quality=lossless';
+			var tex_bottom = 'https://media.discordapp.net/attachments/451715651761995778/1240366889293709543/skybox_bottom.png?ex=66464d2f&is=6644fbaf&hm=bea3f120095f395f632a4237c7e3a8a10def0f1f0f014dd822c4415a90db3476&=&format=webp&quality=lossless';
+			var tex_left =   'https://media.discordapp.net/attachments/451715651761995778/1240366889562017793/skybox_left.png?ex=66464d2f&is=6644fbaf&hm=7952defe908624d33cad2975fc12d02f3d4231a88c8f95d1b817ff3f216b71c0&=&format=webp&quality=lossless';
+			var tex_right =  'https://media.discordapp.net/attachments/451715651761995778/1240366888563900456/skybox_right.png?ex=66464d2f&is=6644fbaf&hm=f8b3299a17627411e5e217d42c6165d211b832c38d3cf1059971e4a6a327d7d8&=&format=webp&quality=lossless';
 
-                var coneN = new THREE.Mesh(coneGeom, materialN);
+			scene.background = new THREE.CubeTextureLoader().load([
+                tex_right,
+                tex_left,
+                tex_top,
+                tex_bottom,
+                tex_front,
+                tex_back
+			]);
+			scene.background.colorSpace = THREE.LinearSRGBColorSpace;
 
-                coneN.position.set(x, y, z);
-                scene.add(coneN);
-            }
+            var crystalMat = new THREE.MeshPhysicalMaterial();
+			crystalMat.transmission = 1; 
+			crystalMat.roughness = 0;
+			crystalMat.thickness = 5;
+			var crystalGeom = new THREE.IcosahedronGeometry(10, 0);
 
-            var numberCones = 500;
+			var animationArray = new Array();
+			function makeCrystal(x,y,z) {
+				var crystalMesh = new THREE.Mesh(crystalGeom, crystalMat);
+				crystalMesh.position.set(x, y, z);
+
+                function rp1() { return Math.random() * 0.01 * 2 - 0.01; }
+				crystalMesh.xAngleSpeed = rp1();
+				crystalMesh.yAngleSpeed = rp1();
+				crystalMesh.zAngleSpeed = rp1();
+				animationArray.push(crystalMesh);
+				scene.add(crystalMesh);
+			}
+
+            var numberCrystals = 10;
             var cubeSize = 100;
 
             var canvasSize = 100;
@@ -87,29 +106,29 @@
             document.getElementById("upButton").addEventListener("click", resizeUp);
             document.getElementById("downButton").addEventListener("click", resizeDown);
 
-            function rp() {
+            function rp2() {
                 return Math.random() * cubeSize * 2 - cubeSize;
             }
 
-            for (var i = 0; i < numberCones; i++) {
-                addCone(rp(), rp(), -cubeSize);
+            for (var i = 0; i < numberCrystals; i++) {
+                makeCrystal(rp2(), rp2(), -cubeSize);
             }
-            for (var i = 0; i < numberCones; i++) {
-                addCone(rp(), rp(), cubeSize);
-            }
-
-            for (var i = 0; i < numberCones; i++) {
-                addCone(rp(), cubeSize,rp());
-            }
-            for (var i = 0; i < numberCones; i++) {
-                addCone(rp(), -cubeSize,rp());
+            for (var i = 0; i < numberCrystals; i++) {
+                makeCrystal(rp2(), rp2(), cubeSize);
             }
 
-            for (var i = 0; i < numberCones; i++) {
-                addCone(cubeSize, rp(), rp());
+            for (var i = 0; i < numberCrystals; i++) {
+                makeCrystal(rp2(), cubeSize,rp2());
             }
-            for (var i = 0; i < numberCones; i++) {
-                addCone(-cubeSize, rp(), rp());
+            for (var i = 0; i < numberCrystals; i++) {
+                makeCrystal(rp2(), -cubeSize,rp2());
+            }
+
+            for (var i = 0; i < numberCrystals; i++) {
+                makeCrystal(cubeSize, rp2(), rp2());
+            }
+            for (var i = 0; i < numberCrystals; i++) {
+                makeCrystal(-cubeSize, rp2(), rp2());
             }
 
             var lastTime = 0;
@@ -129,6 +148,12 @@
 
                 light.position.x = Math.cos(time) * 50;
                 light.position.z = Math.sin(time) * 50;
+
+                animationArray.forEach(crystal => {
+					crystal.rotation.x = crystal.rotation.x + crystal.xAngleSpeed;
+					crystal.rotation.y = crystal.rotation.y + crystal.yAngleSpeed;
+					crystal.rotation.z = crystal.rotation.z + crystal.zAngleSpeed;
+				});
 			}
 
             window.addEventListener("deviceorientation", deviceOrientation, true);
